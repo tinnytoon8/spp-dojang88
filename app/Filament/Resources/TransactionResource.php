@@ -46,11 +46,8 @@ class TransactionResource extends Resource
                 ->schema([
                     Forms\Components\Select::make('program_id')
                         ->required()
-                        ->label('Program')
-                        ->options(
-                            Program::query()
-                                ->get()
-                                ->mapWithKeys(function ($program) {
+                        ->label('Jenis Program & Level')
+                        ->options(Program::query()->get()->mapWithKeys(function ($program) {
                                     return [
                                         $program->id => $program->name . ' - Tingkat Sabuk(Geup): ' . $program->belt_levels
                                     ];
@@ -81,6 +78,18 @@ class TransactionResource extends Resource
                 Tables\Columns\TextColumn::make('users.name')
                     ->label('Nama Anggota')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('users.phone')
+                    ->label('Nomor Telepon')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('programs.name')
+                    ->label('Program')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('programs.belt_levels')
+                    ->label('Level')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('programs.cost')
+                    ->label('Iuran Bulanan')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('payment_method')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('payment_status')
@@ -95,15 +104,7 @@ class TransactionResource extends Resource
                     ->label('Bukti Pembayaran')
                     ->width(450)
                     ->height(225),
-                Tables\Columns\TextColumn::make('programs.name')
-                    ->label('Program')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('programs.belt_levels')
-                    ->label('Level')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('programs.cost')
-                    ->label('Iuran Bulanan')
-                    ->searchable(),
+                
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

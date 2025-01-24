@@ -16,6 +16,6 @@ class Transaction extends Model
     }
 
     public function programs() {
-        return $this->belongsTo(Program::class, 'user_id');
+        return $this->belongsTo(Program::class, 'program_id');
     }
 }

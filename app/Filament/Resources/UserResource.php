@@ -10,6 +10,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Filament\Forms\Components\FileUpload;
 use Filament\Tables\Columns\ImageColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -61,9 +62,9 @@ class UserResource extends Resource
                 Forms\Components\FileUpload::make('certificate')
                     ->image() 
                     ->columnSpanFull(),
-                // Forms\Components\Select::make('roles')
-                //     ->multiple() 
-                //     ->relationship('roles', 'name'),
+                Forms\Components\Select::make('roles')
+                    ->multiple() 
+                    ->relationship('roles', 'name'),
             ]);
     }
 
@@ -75,15 +76,12 @@ class UserResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email')
                     ->searchable(),
-                // Tables\Columns\TextColumn::make('email_verified_at')
-                //     ->dateTime()
-                //     ->sortable(),
                 Tables\Columns\TextColumn::make('phone')
                     ->searchable(),
                 Tables\Columns\ImageColumn::make('image'),
                 Tables\Columns\ImageColumn::make('certificate')
                     ->searchable(),
-                // Tables\Columns\ImageColumn::make('roles.name'),
+                Tables\Columns\TextColumn::make('roles.name'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
